@@ -1,0 +1,140 @@
+.test-container {
+    position: fixed;
+    width: 100%;
+
+}
+
+.information-container {
+    position: fixed;
+    width: 100%;
+    display: grid;
+    align-self: center;
+
+
+    margin: auto;
+
+    padding: 10px;
+}
+
+
+.btn {
+    position: absolute;
+
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.headworks {
+    top: 65%;
+    left: 71%;
+
+
+}
+
+.admin {
+    position: absolute;
+    top: 37%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.ras {
+    position: absolute;
+    top: 75%;
+    left: 36%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.comag_ras {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.press {
+    position: absolute;
+    top: 34%;
+    left: 23%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.sludge {
+    position: absolute;
+    top: 20%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.container .btn:hover {
+    background-color: black;
+}
+
+.building_div {
+    float: left;
+
+    left: 30%;
+    top: 15%;
+
+
+}
+
+.information-container img {
+    width: 100%;
+
+    object-fit: contain;
+}
+
+.extinguisher_location_description {
+
+}
+
+.extinguisher_photo {
+
+}

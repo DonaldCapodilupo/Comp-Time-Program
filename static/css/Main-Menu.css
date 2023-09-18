@@ -1,0 +1,12 @@
+.main-content-div {
+    background-color: #1C6C4F;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+}
+
+
+body {
+    background-color: #222222;
+}

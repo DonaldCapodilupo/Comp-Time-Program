@@ -1,0 +1,16 @@
+
+
+.individual_question{
+    background-color: tan;
+    border-radius: 25px;
+    border-color: white;
+    border-style: solid;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 15px;
+    padding-bottom: 25px
+}
+
+.question_information{
+
+}

@@ -1,0 +1,55 @@
+body {
+    background-color: #222222;
+}
+
+/*Lab Sheet - Following functions determine how the main tables of user input will look.*/
+.Input-Table {
+    background-color: #D4CBE5;
+    padding: 10px 10px 10px;
+    margin: 10px 10px 10px 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+
+}
+
+
+.Title-Row {
+    background: #1C6C4F;
+    display: block;
+    font-size: xx-large;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+label {
+    text-align: left;
+    font-weight: bold;
+}
+
+/*Lab Sheet - Main page*/
+.Plant-Chemical-Table {
+    background-color: #08A4BD;
+    border-radius: 20px;
+}
+
+/*Lab Sheet - TSS & TVSS Unique*/
+.TSS-Background{
+    background: #BFAE48;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.TVSS-Backround{
+    background: #A4303F;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+
+
+
