@@ -2,240 +2,152 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Comp Time</title>
-
+    <title>View Comp Time</title>
     <link rel="stylesheet" href="../static/css/bootstrap.css">
     <script src="../static/js/bootstrap.js"></script>
-
 </head>
-<body class="bg-dark">
+<body>
+<form action="{{ url_for('view_Comp_Time', employee = employee_name)}}" enctype=multipart/form-data method="POST">
 
-<form action="{{ url_for('request_Comp_Time') }}" enctype=multipart/form-data method="POST">
 
-    <div class="container bg-info pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center display-1">View Comp Time</div>
+        </div>
+
+        <div class="row">
+            <div class="col text-center">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Available Hours</th>
+                    </tr>
+                    <tr>
+                        <td>{{ employee_name }}</td>
+                        <td>32</td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
         <div class="row mt-3">
-            <div class="text-center display-1">Comp Time Request</div>
-        </div>
-
-        <div class="row pt-3">
-
-            <div class="col">
-                <label for="employee_input">Employee:</label>
-                <select class="form-select form-select-lg mb-3 employee_name" aria-label=".form-select-lg example"
-                        id="employee_input" name="employee_name">
-
-                    {% for id, name in employees.items() %}
-                        <option value="{{ name }}">{{ name }}</option>
-                    {% endfor %}
-                </select>
-
-
-                <div class="row">
-                    <div class="col text-center">
-
-                        <p>Current Hours:<b>
-                        <p><span id="current_user_hours"
-                                 class="current_user_hours">{{ starting_hour }}</span></b>
-                        <input type="number" id="current_hours_input" name="current_hours_input" style="display: none">
-                        </p>
-
-                    </div>
-                    <div class="col text-center">
-                        <p>Max Hours You Can Earn</p>
-                        <p><b><span id="output_max_hours" class="output_max_hours">0</span></b></p>
-                    </div>
-
-                </div>
-                <div class="row pt-3">
-                    <div class="col text-center">
-                        <button type="submit" class="btn btn-dark" formnovalidate>Check History</button>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col text-center pt-5">
-                <label for="week_ending">Week Ending:</label>
-                <input type="date" id="week_ending_date" name="week_ending_date" required>
-
-            </div>
-            <div class="col">
-                <label for="time_and_a_half_hours_worked">Time and A Half Hours Worked</label>
-                <input type="number" id="time_and_a_half_hours_worked" name="time_and_a_half_hours_worked"
-                       class="working_hours" required>
-                <label for="double_time_hours_worked">Double Time Hours Worked</label>
-                <input type="number" id="double_time_hours_worked" name="double_time_hours_worked" class="working_hours"
-                       value="0">
-
-            </div>
             <div class="col text-center">
-                <h1>Hours Earned</h1>
-                <h3><span id="output_hours_earned" class="output_hours_earned">0</span></h3>
-                <input type="number" id="hours_requested" name="hours_requested" style="display: none">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Prior Available Hours</th>
+                        <th>Request</th>
+                        <th>Status</th>
+                        <th>Hour Adjustment</th>
+                        <th>Current Hours Available</th>
+
+                    </tr>
+                    <tr>
+                        <td>2023-09-18</td>
+                        <td>28</td>
+                        <td>Use 8 Hours</td>
+                        <td>Pending</td>
+                        <td>-</td>
+                    </tr>
+                    <!-- Row 2 -->
+                    <tr>
+                        <td>2023-09-17</td>
+                        <td>32</td>
+                        <td>Use 8 Hours</td>
+                        <td>Denied</td>
+                        <td>-</td>
+                        <td>32</td>
+                    </tr>
+                    <!-- Row 4 -->
+                    <tr>
+                        <td>2023-09-15</td>
+                        <td>28</td>
+                        <td>Add 4 Hours</td>
+                        <td>Approved</td>
+                        <td>+4</td>
+                        <td>32</td>
+                    </tr>
+                    <!-- Row 5 -->
+                    <tr>
+                        <td>2023-09-14</td>
+                        <td>28</td>
+                        <td>Add 6 Hours</td>
+                        <td>Denied</td>
+                        <td>-</td>
+                        <td>28</td>
+                    </tr>
+                    <!-- Row 6 -->
+                    <tr>
+                        <td>2023-09-13</td>
+                        <td>16</td>
+                        <td>Add 12 Hours</td>
+                        <td>Approved</td>
+                        <td>+12</td>
+                        <td>28</td>
+                    </tr>
+                    <!-- Row 7 -->
+                    <tr>
+                        <td>2023-09-12</td>
+                        <td>10</td>
+                        <td>Add 12 Hours</td>
+                        <td>Approved</td>
+                        <td>+12</td>
+                        <td>22</td>
+                    </tr>
+                    <!-- Row 8 -->
+                    <tr>
+                        <td>2023-09-11</td>
+                        <td>18</td>
+                        <td>Use 8 Hours</td>
+                        <td>Approved</td>
+                        <td>-8</td>
+                        <td>10</td>
+                    </tr>
+                    <!-- Row 9 -->
+                    <tr>
+                        <td>2023-09-10</td>
+                        <td>12</td>
+                        <td>Add 6 Hours</td>
+                        <td>Approved</td>
+                        <td>+6</td>
+                        <td>18</td>
+                    </tr>
+                    <!-- Row 10 -->
+                    <tr>
+                        <td>2023-09-09</td>
+                        <td>0</td>
+                        <td>Add 12 Hours</td>
+                        <td>Approved</td>
+                        <td>+12</td>
+                        <td>12</td>
+                    </tr>
+                    </thead>
+                </table>
             </div>
 
-
-        </div>
-
-        <div class="row pt-3">
-            <div class="col text-center">
-                <button type="submit" class="btn btn-dark">Submit Request</button>
-
-
-            </div>
         </div>
 
 
         <div class="row">
-            <div class="col text-center display-3">
-                Recent Requests
-            </div>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col-lg text-center">
-                <table class="table table-hover table-dark">
-                    <thead>
-                    <tr>
-                        <th>Date Requested</th>
-                        <th>Hours Available</th>
-                        <th>Hours Worked</th>
-                        <th>Hours Earned</th>
-                        <th>Hours Used</th>
-                        <th>Used Available</th>
-                    </tr>
-
-                    <tr>
-                        <td>9/7/23</td>
-                        <td>12</td>
-                        <td>8</td>
-                        <td>12</td>
-                        <td>4</td>
-                        <td>20</td>
-                    </tr>
-                    <tr>
-                        <td>8/30/23</td>
-                        <td>20</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>8</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>8/17/23</td>
-                        <td>16</td>
-                        <td>8</td>
-                        <td>12</td>
-                        <td>0</td>
-                        <td>20</td>
-                    </tr>
-                    </thead>
-
-                </table>
+            <div class="col text-center">
+                <button class="btn btn-dark" type="submit">Return Home</button>
             </div>
 
         </div>
     </div>
 </form>
 
+<div class="row mt-3">
+
+    <div class="col text-center">
+        <button class="btn btn-success" onclick="print()">Print Log</button>
+    </div>
+</div>
+
+
+
 </body>
-
-
-<script>
-
-
-    //const employees =
-    //    {
-    //        "Keith Jenkins": 8,
-    //        "Martin Diaz": 15,
-    //        "Bill Powderly": 4,
-    //        "David Banda": 12,
-    //        "Dragan Cupic": 0,
-    //        "Shayne MacAuley": 4,
-    //        "John McCusker": 22,
-    //        "Connor Morey": 4,
-    //        "Chris Sirmpoulos": 0,
-    //        "Jeff Spencer": 8,
-    //        "Rafael Vega": 16,
-    //        "Fiona Mckenna": 32,
-    //        "Don Capodilupo": 32
-    //    }
-
-
-    //document.getElementById("current_user_hours").innerText = employees[Object.keys()[0]]
-
-
-    function update_Hours_Earned() {
-        let time_and_half_worked = document.getElementById("time_and_a_half_hours_worked").value;
-        let double_time_worked = document.getElementById("double_time_hours_worked").value;
-
-        let time_and_half_earned = time_and_half_worked * 1.5
-        let double_time_earned = double_time_worked * 2
-        let total_time_earned = time_and_half_earned + double_time_earned
-        console.log(total_time_earned)
-
-        document.getElementById("output_hours_earned").innerText = total_time_earned
-        document.getElementById("hours_requested").value = total_time_earned
-        document.getElementById("current_hours_input").value = total_time_earned
-
-        let hours_banked = Number(document.getElementById("current_user_hours").innerText)
-
-        console.log(total_time_earned)
-        console.log(hours_banked)
-        console.log(total_time_earned + hours_banked)
-
-        if (total_time_earned + hours_banked > 32) {
-            console.log("User is trying to convert to many hours.")
-            document.getElementById("output_hours_earned").style.color = "red"
-        } else {
-            document.getElementById("output_hours_earned").style.color = "black"
-        }
-
-
-    }
-
-    function update_Banked_Hours(employee) {
-
-
-        let employees_banked_hours_dict ={{ banked_hours | safe }};
-        console.log(employees_banked_hours_dict)
-
-        document.getElementById("current_user_hours").innerText = employees_banked_hours_dict[employee].toString();
-        update_Max_Hours()
-        update_Hours_Earned()
-    }
-
-    function update_Max_Hours() {
-        console.log(document.getElementById("current_user_hours"))
-        document.getElementById("output_max_hours").innerText = 32 - Number(document.getElementById("current_user_hours").textContent)
-    }
-
-
-    let working_hours = document.querySelectorAll(".working_hours")
-    working_hours.forEach(function (elem) {
-        elem.addEventListener("input", function (event) {
-            update_Hours_Earned();
-        })
-    })
-
-    let banked_hours = document.querySelectorAll(".employee_name")
-    banked_hours.forEach(function (elem) {
-        elem.addEventListener("input", function (event) {
-            console.log(this.value)
-            update_Banked_Hours(this.value);
-            update_Hours_Earned();
-        })
-    })
-
-    update_Max_Hours()
-    //let max_hours_available = document.querySelectorAll(".output_max_hours")
-    //max_hours_available.forEach(function (elem) {
-    //    elem.addEventListener("input", function (event) {
-    //        console.log(this.value)
-    //        update_Max_Hours()
-    //    })
-    //})
-
-
-</script>
 </html>

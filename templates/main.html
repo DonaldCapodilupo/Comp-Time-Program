@@ -2,9 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>View Comp Time</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <script src="../static/js/bootstrap.js"></script>
 </head>
 <body>
+<form action="{{ url_for('main_Menu')}}" enctype=multipart/form-data method="POST">
+    {% if confirmation %}
+        <h1>{{ confirmation }}</h1>
+    {% endif %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <button type="submit" name="submit_button" value="Request Comp Time" class="btn btn-info" formnovalidate>Request Comp Time</button>
+            </div>
+            <div class="col text-center">
+                <label for="employee_input">Employee:</label>
+                <select class="form-select form-select-lg mb-3 employee_name" aria-label=".form-select-lg example"
+                        id="employee_input" name="employee_name">
+
+                    {% for id, name in employees.items() %}
+                        <option value="{{ name }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-info" name="submit_button" value="View Available Comp Time">View Available Comp Time</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+
 
 </body>
 </html>
