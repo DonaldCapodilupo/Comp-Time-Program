@@ -65,6 +65,8 @@ def request_Comp_Time():
         Database_Modifier().check_If_Table_Exists("Comp_Time_Requests", data_dict.keys())
         Database_Modifier().create_Database_Row("Comp_Time_Requests", data_dict)
         return redirect(url_for("main_Menu", confirmation="Comp Time Requested Submitted"))
+
+
     else:
         with open('static/Employee List.json') as json_file:
             employee_dict = json.load(json_file)

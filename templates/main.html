@@ -6,20 +6,30 @@
     <link rel="stylesheet" href="../static/css/bootstrap.css">
     <script src="../static/js/bootstrap.js"></script>
 </head>
-<body>
-<form action="{{ url_for('main_Menu')}}" enctype=multipart/form-data method="POST">
-    {% if confirmation %}
-        <h1>{{ confirmation }}</h1>
-    {% endif %}
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <button type="submit" name="submit_button" value="Request Comp Time" class="btn btn-info" formnovalidate>Request Comp Time</button>
+<body class="bg-dark">
+<form action="{{ url_for('main_Menu') }}" enctype=multipart/form-data method="POST">
+    <div class="container bg-info pb-5">
+        <!--{% if confirmation %}
+            <h1>{{ confirmation }}</h1>
+        {% endif %}-->
+
+        <div class="row mt-3">
+            <div class="col text-center display-1">Comp Time Information</div>
+        </div>
+
+
+        <div class="row pb-5">
+            <div class="col text-center pt-5">
+                <button type="submit" name="submit_button" value="Request Comp Time" class="btn btn-dark"
+                        formnovalidate>Request Comp Time
+                </button>
             </div>
-            <div class="col text-center">
-                <label for="employee_input">Employee:</label>
+            <div class="col text-center pt-3">
+
+
+                <label for="employee_input"><b>Employee:</b></label>
                 <select class="form-select form-select-lg mb-3 employee_name" aria-label=".form-select-lg example"
                         id="employee_input" name="employee_name">
 
@@ -27,13 +37,18 @@
                         <option value="{{ name }}">{{ name }}</option>
                     {% endfor %}
                 </select>
-                <button type="submit" class="btn btn-info" name="submit_button" value="View Available Comp Time">View Available Comp Time</button>
+                <button type="submit" class="btn btn-dark" name="submit_button" value="View Available Comp Time">
+                    View
+                    Available Comp Time
+                </button>
+
+
             </div>
         </div>
 
+
     </div>
 </form>
-
 
 
 </body>
