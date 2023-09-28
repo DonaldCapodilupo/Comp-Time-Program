@@ -1,4 +1,5 @@
 import os, csv, datetime, sqlite3
+import pandas as pd
 
 today = str(datetime.date.today())
 
@@ -11,21 +12,113 @@ def record_Request(form_dict):
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(list_of_values)
 
+def create_CSV_Row(file_name, row_data):
+    with open(file_name, "a", newline="") as csv_file:
+        csv_writer = csv.writer(csv_file)
+        csv_writer.writerow(row_data)
+
+def read_One_Specific_CSV(file_path):
+    df = pd.read_csv(file_path)
+    print(df)
+
+def read_All_CSVs_Return_Employee(employee, *args, specific_value=False):
+    dbs_to_check = ["Approved.csv","Pending.csv","Rejected.csv"]
+    print(args)
+
+
+
+    frames = []
+
+    for csv_file in dbs_to_check:
+        df = pd.read_csv("History/" + csv_file)
+
+        df2 = df.assign(Status=csv_file[:-4])
+        test_value = df2.loc[df2['Employee'] == employee]
+
+        frames.append(test_value)
+    result = pd.concat(frames)
+
+    if specific_value:
+        return result.loc[result[args[0]] == args[1]]
+    else:
+        return result
+
+
+
 
 def program_Setup_On_Startup():
-    print("Checking to see if Comp Time Ledger.csv is present in current directory.")
-    if "Comp Time Ledger.csv" not in os.listdir():
-        print("Comp Time Ledger.csv not found.")
-        print("Creating Comp Time Ledger.csv")
-        with open("Comp Time Ledger.csv", "w", newline="") as csv_file:
-            csv_writer = csv.writer(csv_file)
+    directory_dict = {
+        "Users":{},
+        "History":{
+            "Pending.csv":["Date Requested", "Employee","Hours Available","Hours Requested","Week Ending",""],
+            "Approved.csv":["Date Requested", "Employee","Hours Available","Hours Requested","Week Ending","Date Approved"],
+            "Rejected.csv":["Date Requested", "Employee","Hours Available","Hours Requested","Week Ending","Date Denied"]}
+    }
 
-            csv_writer.writerow(
-                ["Date", "Employee", "Current Comp Time Balance","Week Ending" "Time and a Half Hours Worked",
-                 "Double Time Worked","Compt Time Hours Requested", "Compt Time Hours Used", "Compt Time Available"])
-            csv_file.close()
-    else:
-        print("Comp Time Ledger.csv is present.")
+    for directory in directory_dict:
+        print("Checking to see if "+directory+" is in the current directory..")
+        if directory not in os.listdir():
+            print(directory+ " directory not found.")
+            print("Creating " + directory)
+
+            os.mkdir(directory)
+
+            for file_name, column_headers in directory_dict[directory].items():
+                print("Creating " + file_name + " within directory " + directory)
+                
+                with open(directory+"/" + file_name, "w", newline="") as csv_file:
+                    csv_writer = csv.writer(csv_file)
+
+                    csv_writer.writerow(column_headers)
+                    csv_file.close()
+        else:
+            print("Comp Time Ledger.csv is present.")
+
+
+#For the personnel logging application.
+def create_JSON_Personal_File(information_dict):
+    import json
+    with open("Users/" + information_dict["Name"]+'.json', 'w') as outfile:
+        json.dump(information_dict,outfile)
+
+#For the personnel logging application.
+def read_JSON_Personal_File(user):
+    import json
+
+    with open('Users/' + user +'.json') as json_file:
+        data = json.load(json_file)
+    print(data)
+
+    return data
+
+#For the personnel logging application. Currently only updates one value at a time.
+def updated_JSON_Personnel_File(info_list):
+    import json
+
+    user = "Users/" + info_list[0] + ".json"
+    print(user)
+    with open(user, "r") as jsonFile:
+        data = json.load(jsonFile)
+
+
+    for index, key in enumerate(data.keys()):
+        try:
+            data[key] = info_list[index]
+        except IndexError as e:
+            print("Error: " + str(e))
+            print("Index: " + str(index) + " Key: " + key)
+            pass
+
+    with open(user, "w") as jsonFile:
+        json.dump(data, jsonFile)
+
+def delete_JSON_Personnel_File(user):
+    os.replace("Users/" + user + ".json", "Retired Users/" + user + ".json")
+
+#For the personnel viewing application
+def get_All_Current_Personnel():
+    personnel = [x.replace(".json","") for x in os.listdir("Users")]
+    return personnel
 
 
 class Database_Modifier:
