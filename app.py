@@ -59,11 +59,10 @@ def view_Comp_Time(employee):
 @app.route('/Request-Comp-Time', methods=["POST", "GET"])
 def request_Comp_Time():
     if request.method == "POST":
-        from Backend import Database_Modifier
+        from Backend import create_JSON_Personal_File
         data_dict = request.form.to_dict()
 
-        Database_Modifier().check_If_Table_Exists("Comp_Time_Requests", data_dict.keys())
-        Database_Modifier().create_Database_Row("Comp_Time_Requests", data_dict)
+        create_JSON_Personal_File(data_dict)
         return redirect(url_for("main_Menu", confirmation="Comp Time Requested Submitted"))
 
 
