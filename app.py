@@ -37,23 +37,17 @@ def main_Menu():
 @app.route('/View-Profile/<string:employee>', methods=["POST", "GET"])
 def view_Comp_Time(employee):
     if request.method == "POST":
-        button_clicked = request.form['submit_button']
-        redirect_dict = {
-            "Request Comp Time": "request_Comp_Time",
-            "View Comp Time": "view_Comp_Time",
 
-        }
-
-        reports_that_require_case_numbers = ["Daily Activity Report", "Check Case Status", "Witness Statement",
-                                             "Person of Interest",
-                                             "Interview Report", "Create BOLO"]
-
-        if button_clicked in reports_that_require_case_numbers:
-            return redirect(url_for(redirect_dict[button_clicked],))
-        else:
-            return redirect(url_for(redirect_dict[button_clicked]))
+        return redirect(url_for('main_Menu'))
     else:
-        return render_template("View Comp Time.html", employee_name = escape(employee))
+        from Backend import read_All_CSVs_Return_Employee
+
+
+
+        data = read_All_CSVs_Return_Employee(employee).to_html(open('templates/Account_History.html', 'w'), index=False, classes="table table-sm table-dark")
+
+
+        return render_template("View Comp Time.html", employee_name = escape(employee), total_data = data)
 
 
 @app.route('/Request-Comp-Time', methods=["POST", "GET"])
