@@ -42,12 +42,13 @@ def view_Comp_Time(employee):
     else:
         from Backend import read_All_CSVs_Return_Employee
 
+        data = read_All_CSVs_Return_Employee(employee)
+        data.to_html(open('templates/Account_History.html', 'w'), index=False, classes="table table-sm table-dark")
 
+        with open('templates/Account_History.html', 'r') as infp:
+            new_data = infp.read()
 
-        data = read_All_CSVs_Return_Employee(employee).to_html(open('templates/Account_History.html', 'w'), index=False, classes="table table-sm table-dark")
-
-
-        return render_template("View Comp Time.html", employee_name = escape(employee), total_data = data)
+        return render_template("View Comp Time.html", employee_name=escape(employee), total_data=new_data)
 
 
 @app.route('/Request-Comp-Time', methods=["POST", "GET"])
@@ -69,8 +70,9 @@ def request_Comp_Time():
         return render_template("Request Comp Time.html", employees=employee_dict, banked_hours=current_banked_hours,
                                starting_hour=starting_hour)
 
+
 start = program_Setup_On_Startup()
 
-
 if __name__ == '__main__':
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.run(debug=True)

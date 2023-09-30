@@ -41,7 +41,7 @@ def read_All_CSVs_Return_Employee(employee, *args, specific_value=False):
     if specific_value:
         return result.loc[result[args[0]] == args[1]]
     else:
-        return result
+        return result.sort_values("Date Requested")
 
 
 
