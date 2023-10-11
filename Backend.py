@@ -3,6 +3,42 @@ import pandas as pd
 
 today = str(datetime.date.today())
 
+def manage_Comp_Time(managerial_dict):
+
+    approved_employees = []
+    denied_employees = []
+
+    for key, value in managerial_dict.items():
+        print("Key: " + key)
+        print("Value: " + value)
+        if key == "submit_button":
+            pass
+        if "Denied" in value:
+            employee_name = value[:-7]
+            denied_employees.append(employee_name)
+        else:
+            employee_name = value[:-9]
+            approved_employees.append(employee_name)
+
+    df_pending = pd.read_csv("History/Pending.csv")
+    #df = df_pending[df_pending.Employee != "Fiona Mckenna" and df_pending["Hours_Available"] == "8"]
+
+    #print(df)
+
+    with open("History/Pending.csv", "r", newline="") as csv_file:
+        for row in csv_file:
+            print(row)
+
+    print("Denied: ")
+    print(denied_employees)
+
+    for name in approved_employees:
+        pass
+
+    print("Approved: ")
+    print(approved_employees)
+
+#manage_Comp_Time({'submit_button': '', 'Don Capodilupo Denied': 'on', 'Connor Morey Denied': 'on'})
 
 def record_Request(form_dict):
     list_of_values = list(form_dict.values())
@@ -17,9 +53,26 @@ def create_CSV_Row(file_name, row_data):
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(row_data)
 
+def get_Pending_Requests():
+    df = read_One_Specific_CSV("History/Pending.csv")
+
+    pending_dict = {}
+
+    for name, hours_requested in  dict(zip(df["Employee"], df["Hours Requested"])).items():
+        pending_dict[name] = {"Hours Requested":"",
+                              "Hours Available":""}
+        pending_dict[name]["Hours Requested"] = hours_requested
+
+    for name, available_hours in  dict(zip(df["Employee"], df["Hours Available"])).items():
+        pending_dict[name]["Hours Available"] = available_hours
+
+
+    return pending_dict
+
+
 def read_One_Specific_CSV(file_path):
     df = pd.read_csv(file_path)
-    print(df)
+    return df
 
 def read_All_CSVs_Return_Employee(employee, *args, specific_value=False):
     dbs_to_check = ["Approved.csv","Pending.csv","Rejected.csv"]
