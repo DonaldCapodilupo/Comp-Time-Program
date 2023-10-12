@@ -1,7 +1,7 @@
 import os, csv, datetime, sqlite3
 import pandas as pd
 
-today = str(datetime.date.today())
+today = str(datetime.date.today().strftime('%m/%d/%Y')).replace("-","/")
 
 def manage_Comp_Time(managerial_dict):
 
@@ -13,7 +13,7 @@ def manage_Comp_Time(managerial_dict):
         print("Value: " + value)
         if key == "submit_button":
             pass
-        if "Denied" in value:
+        elif "Denied" in value:
             employee_name = value[:-7]
             denied_employees.append(employee_name)
         else:
@@ -25,10 +25,27 @@ def manage_Comp_Time(managerial_dict):
 
     #print(df)
 
-    with open("History/Pending.csv", "r", newline="") as csv_file:
-        for row in csv_file:
-            print(row)
+    with open("History/Pending.csv", "r", newline="") as inp, open('History/tempfile.csv', 'w', newline="") as out:
+        writer = csv.writer(out)
 
+        for row in csv.reader(inp):
+
+            pending_employee = row[1]
+            if pending_employee in approved_employees:
+                print(pending_employee + " is in the approved list.")
+                create_CSV_Row("History/Approved.csv", row.append(today))
+
+
+            elif pending_employee in denied_employees:
+                print(pending_employee + " is in the denied list.")
+                row.append(today)
+                create_CSV_Row("History/Rejected.csv", row)
+
+            else:
+                print(pending_employee + " was not approved or denied.")
+                writer.writerow(row)
+    os.remove("History/Pending.csv")
+    os.rename("History/tempfile.csv", "History/Pending.csv")
     print("Denied: ")
     print(denied_employees)
 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Comp Time</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <script src="../static/js/bootstrap.js"></script>
+</head>
+<body class="bg-dark">
+<form action="{{ url_for('manage_Comp_Time', employee = employee_name) }}" enctype=multipart/form-data method="POST">
+
+
+    <div class="container bg-info">
+        <div class="row pb-5">
+            <div class="text-center display-1">Manage Comp Time</div>
+
+            <div class="col ">
+                <button class="btn btn-dark float-end" type="submit" formnovalidate>Return Home</button>
+            </div>
+        </div>
+
+
+        <div class="row mb-3">
+            <div class="text-center display-4 mb-1">Items Needing Approval</div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Authorization Code</span>
+                        <input type="password" class="form-control" placeholder="" aria-label="Username"
+                               aria-describedby="basic-addon1" autocomplete="off" required>
+                    </div>
+
+
+                </div>
+                <div class="col">
+                    <button type="submit" name="submit_button" class="btn btn-light">Submit</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row text-center mb-5">
+            <div class="col" style="text-align: center">
+
+
+                {{ pending_requests | safe }}
+
+
+            </div>
+
+        </div>
+
+    </div>
+</form>
+
+
+</body>
+</html>
